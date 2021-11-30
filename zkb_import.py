@@ -15,6 +15,8 @@ def killhash(fetchid, cos):
         fetchmod = "solarSystemID"
     if cos == 2:
         fetchmod = "corporationID"
+    if cos == 3:
+        fetchmod = "characterID"
 
     systemkills = requests.get(f"https://zkillboard.com/api/losses/{fetchmod}/{fetchid}/").text
     systemkills_info = json.loads(systemkills)
@@ -34,12 +36,17 @@ def get_system_id(fulldataframe):
     print("Do you want to look up a System or a Corporation?")
     print("1 for System")
     print("2 for Corporation")
+    print("3 for player")
     cos = int(input())
-    if cos == 2:
-        return int(input("Provide Corp ID: "))
     try:
-        user_system = input("What System: ")
-        return s[user_system], cos
+        if cos == 1:
+            user_system = input("What System: ")
+            return s[user_system], cos
+        if cos == 2:
+            return int(input("Provide Corp ID: ")), cos
+        if cos == 3:
+            return int(input("Provide Player ID: ")), cos
+
     except KeyError:
         print("Invalid System")
         user_system = input()
