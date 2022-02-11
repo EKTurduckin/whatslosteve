@@ -18,8 +18,8 @@ def things_lost():
                 items_lost_final = items_lost.sort_values("typeID", ascending=False)
                 ships_lost_final = ships_lost.sort_values("typeID", ascending=False)
 
-                print(items_lost_final)
-                print(ships_lost_final)
+                print(items_lost_final[0:20])
+                print(ships_lost_final[0:20])
                 with pd.ExcelWriter("shipmods.xlsx") as writer:
                     items_lost_final.to_excel(writer, sheet_name="modules")
                     ships_lost_final.to_excel(writer, sheet_name="ships")
