@@ -18,7 +18,8 @@ def killhash(fetchid, cos):
     if cos == 3:
         fetchmod = "characterID"
 
-    systemkills = requests.get(f"https://zkillboard.com/api/losses/{fetchmod}/{fetchid}/").text
+    headers = {"User-Agent": "ekturduckin@gmail.com"}
+    systemkills = requests.get(f"https://zkillboard.com/api/losses/{fetchmod}/{fetchid}/", headers=headers).text
     systemkills_info = json.loads(systemkills)
 
     zkb_info = open("zkb_info.csv", "w")
